@@ -119,9 +119,12 @@ All nodes: leaderId = 11, electionCompleted = true
 
 - **Election does not complete** – Ensure all 4 nodes are started and form a complete ring.
 
-## Author
+## Group Members (CS324)
 
-Sione Likiliki.
+- Sione Likiliki
+- Seiloni Utuone
+- Fasi Tangataevaha
+- Lanuongo Guttenbeil
 
 Assignment: Election RMI using Ring Topology (LCR).
 
