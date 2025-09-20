@@ -43,24 +43,29 @@ Open **4 terminals**, one per node.
 cd <project-root>
 java -cp target/classes cs324.election.without.register.NodeImpl 5 Node11 1099 1199
 ```
+<img width="1086" height="489" alt="image" src="https://github.com/user-attachments/assets/530ac367-6f6b-44dc-b755-32c60dc970e8" />
+
 
 ### Terminal 2
 ```bash
 cd <project-root>
 java -cp target/classes cs324.election.without.register.NodeImpl 11 Node2 1199 1299
 ```
+<img width="1085" height="483" alt="image" src="https://github.com/user-attachments/assets/c95879e7-e9bf-4710-a43e-42700783cb88" />
 
 ### Terminal 3
 ```bash
 cd <project-root>
 java -cp target/classes cs324.election.without.register.NodeImpl 2 Node7 1299 1399
 ```
+<img width="1093" height="482" alt="image" src="https://github.com/user-attachments/assets/cb0b548e-3df7-4134-8065-4453e0cd3e7e" />
 
 ### Terminal 4
 ```bash
 cd <project-root>
 java -cp target/classes cs324.election.without.register.NodeImpl 7 Node5 1399 1099
 ```
+<img width="1091" height="481" alt="image" src="https://github.com/user-attachments/assets/62c9730d-4da5-448d-8aee-5b8387abae25" />
 
 ### Arguments Meaning
 1. **Node ID** – unique integer identifier of the node.
@@ -102,6 +107,7 @@ Each node registers itself and connects to its successor to form the ring.
 [Node-11] broadcasting LEADER(11)
 All nodes: leaderId = 11, electionCompleted = true
 ```
+<img width="1918" height="1030" alt="image" src="https://github.com/user-attachments/assets/ab84572b-ddb8-479a-a0d9-57c365f06b2c" />
 
 ## Notes
 
