@@ -1,5 +1,9 @@
 # LCR Ring Election using Java RMI
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Java](https://img.shields.io/badge/Java-8+-blue.svg)](https://openjdk.org/)
+[![Maven](https://img.shields.io/badge/Maven-3.6+-orange.svg)](https://maven.apache.org/)
+
 This project implements the **Le Lann–Chang–Roberts (LCR)** leader election algorithm over a **ring topology** using Java RMI.
 
 Each node is a separate Java process bound to its own RMI registry. The nodes form a logical ring and elect the node with the largest ID as the leader.
