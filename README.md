@@ -22,6 +22,17 @@ It is designed as a coursework assignment for distributed systems, showing how n
 ```bash
 javac -d target/classes src/main/java/cs324/election/without/register/Node.java src/main/java/cs324/election/without/register/*.java
 ```
+## Visual Feedback (Color & Emoji Support)
+
+For best presentation results, enable UTF-8 output in each terminal before starting the nodes. This ensures that ANSI colors and emojis display correctly.
+
+In **PowerShell**, run:
+```
+chcp 65001
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+
+```
+Now when you run the nodes, log messages will include **color-coded text and emojis** for clearer visual feedback.
 
 ## Running the Simulation
 
