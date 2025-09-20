@@ -5,15 +5,12 @@
 package cs324.election.without.register;
 
 /**
- *
- * @author sione.likiliki
+ * Remote interface for nodes in the LCR leader election protocol. Enhanced for
+ * demo presentation with additional status and control methods.
  */
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-/**
- * Remote interface for nodes in the LCR leader election protocol.
- */
 public interface Node extends Remote {
 
     int receiveElection(int uid, int initiatorId) throws RemoteException;
@@ -27,4 +24,15 @@ public interface Node extends Remote {
     void initiateElection() throws RemoteException;
 
     void setAlive(boolean alive) throws RemoteException;
+
+    // Demo enhancement methods
+    String getStatus() throws RemoteException;
+
+    void recover() throws RemoteException;
+
+    void printDetailedStatus() throws RemoteException;
+
+    boolean isElectionInProgress() throws RemoteException;
+
+    boolean isElectionCompleted() throws RemoteException;
 }
