@@ -4,13 +4,21 @@ This project implements the **Le Lann–Chang–Roberts (LCR)** leader election 
 
 Each node is a separate Java process bound to its own RMI registry. The nodes form a logical ring and elect the node with the largest ID as the leader.
 
+## Overview
+This project demonstrates distributed leader election using the LCR algorithm.  
+It is designed as a coursework assignment for distributed systems, showing how nodes in a ring topology coordinate through message passing over Java RMI.
+
+
 ## Requirements
 
 - Java 11 or newer
+- NetBeans or any Java IDE (optional)
 - 4 terminals (or processes) to simulate the nodes
 - Classes compiled to `target/classes`
 
-Compile:
+## Setup
+1. Install Java 11+ and ensure `java` and `javac` are on your PATH.
+2. Compile the source code:
 ```bash
 javac -d target/classes src/main/java/cs324/election/without/register/Node.java src/main/java/cs324/election/without/register/*.java
 ```
@@ -53,7 +61,12 @@ java -cp target/classes cs324.election.without.register.NodeImpl 7 Node5 1399 10
 ```
 Node 5 → Node 11 → Node 2 → Node 7 → Node 5
 ```
-
+```
+   [Node 5] ---> [Node 11]
+       ^             |
+       |             v
+   [Node 7] <--- [Node 2]
+```
 Each node registers itself and connects to its successor to form the ring.
 
 ## Running the Election
@@ -97,6 +110,20 @@ All nodes: leaderId = 11, electionCompleted = true
 - **Election rule**: Forward the larger of (incoming UID, local ID).
 - **Leader detection**: When a node receives its own UID back, it declares itself leader.
 - **Leader announcement**: The leader sends a `LEADER(id)` message around the ring until it returns.
+
+## Troubleshooting
+
+- java.rmi.ConnectException – The successor node or its RMI registry is not running. Start the successor first.
+
+- java.rmi.NotBoundException – The given successor name is not yet registered. Check the name.
+
+- **Election does not complete** – Ensure all 4 nodes are started and form a complete ring.
+
+## Author
+
+Sione Likiliki.
+
+Assignment: Election RMI using Ring Topology (LCR).
 
 ---
 
