@@ -122,6 +122,8 @@ All nodes: leaderId = 11, electionCompleted = true
 - **Leader detection**: When a node receives its own UID back, it declares itself leader.
 - **Leader announcement**: The leader sends a `LEADER(id)` message around the ring until it returns.
 
+Complexity: **O(n²)** messages for the election plus **O(n)** for the leader announcement.
+
 ## Troubleshooting
 
 - java.rmi.ConnectException – The successor node or its RMI registry is not running. Start the successor first.
