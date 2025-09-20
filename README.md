@@ -12,7 +12,7 @@ Each node is a separate Java process bound to its own RMI registry. The nodes fo
 
 Compile:
 ```bash
-javac -d target/classes src/main/java/cs324/election/without/register/Node.java src/main/java/cs324/election/without/register/NodeImpl.java
+javac -d target/classes src/main/java/cs324/election/without/register/Node.java src/main/java/cs324/election/without/register/*.java
 ```
 
 ## Running the Simulation
