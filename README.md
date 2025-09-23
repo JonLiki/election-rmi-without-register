@@ -1,20 +1,42 @@
-<<<<<<< HEAD
 # LCR Ring Election using Java RMI
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Java](https://img.shields.io/badge/Java-8+-blue.svg)](https://openjdk.org/)
+[![Maven](https://img.shields.io/badge/Maven-3.6+-orange.svg)](https://maven.apache.org/)
 
 This project implements the **Le Lann–Chang–Roberts (LCR)** leader election algorithm over a **ring topology** using Java RMI.
 
 Each node is a separate Java process bound to its own RMI registry. The nodes form a logical ring and elect the node with the largest ID as the leader.
 
+## Overview
+This project demonstrates distributed leader election using the LCR algorithm.  
+It is designed as a coursework assignment for distributed systems, showing how nodes in a ring topology coordinate through message passing over Java RMI.
+
+
 ## Requirements
 
 - Java 11 or newer
+- NetBeans or any Java IDE (optional)
 - 4 terminals (or processes) to simulate the nodes
 - Classes compiled to `target/classes`
 
-Compile:
+## Setup
+1. Install Java 11+ and ensure `java` and `javac` are on your PATH.
+2. Compile the source code:
 ```bash
-javac -d target/classes src/main/java/cs324/election/without/register/Node.java src/main/java/cs324/election/without/register/NodeImpl.java
+javac -d target/classes src/main/java/cs324/election/without/register/Node.java src/main/java/cs324/election/without/register/*.java
 ```
+## Visual Feedback (Color & Emoji Support)
+
+For best presentation results, enable UTF-8 output in each terminal before starting the nodes. This ensures that ANSI colors and emojis display correctly.
+
+In **PowerShell**, run:
+```
+chcp 65001
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+
+```
+Now when you run the nodes, log messages will include **color-coded text and emojis** for clearer visual feedback.
 
 ## Running the Simulation
 
@@ -25,24 +47,29 @@ Open **4 terminals**, one per node.
 cd <project-root>
 java -cp target/classes cs324.election.without.register.NodeImpl 5 Node11 1099 1199
 ```
+<img width="1086" height="489" alt="image" src="https://github.com/user-attachments/assets/530ac367-6f6b-44dc-b755-32c60dc970e8" />
+
 
 ### Terminal 2
 ```bash
 cd <project-root>
 java -cp target/classes cs324.election.without.register.NodeImpl 11 Node2 1199 1299
 ```
+<img width="1085" height="483" alt="image" src="https://github.com/user-attachments/assets/c95879e7-e9bf-4710-a43e-42700783cb88" />
 
 ### Terminal 3
 ```bash
 cd <project-root>
 java -cp target/classes cs324.election.without.register.NodeImpl 2 Node7 1299 1399
 ```
+<img width="1093" height="482" alt="image" src="https://github.com/user-attachments/assets/cb0b548e-3df7-4134-8065-4453e0cd3e7e" />
 
 ### Terminal 4
 ```bash
 cd <project-root>
 java -cp target/classes cs324.election.without.register.NodeImpl 7 Node5 1399 1099
 ```
+<img width="1091" height="481" alt="image" src="https://github.com/user-attachments/assets/62c9730d-4da5-448d-8aee-5b8387abae25" />
 
 ### Arguments Meaning
 1. **Node ID** – unique integer identifier of the node.
@@ -54,7 +81,12 @@ java -cp target/classes cs324.election.without.register.NodeImpl 7 Node5 1399 10
 ```
 Node 5 → Node 11 → Node 2 → Node 7 → Node 5
 ```
-
+```
+   [Node 5] ---> [Node 11]
+       ^             |
+       |             v
+   [Node 7] <--- [Node 2]
+```
 Each node registers itself and connects to its successor to form the ring.
 
 ## Running the Election
@@ -79,6 +111,7 @@ Each node registers itself and connects to its successor to form the ring.
 [Node-11] broadcasting LEADER(11)
 All nodes: leaderId = 11, electionCompleted = true
 ```
+<img width="1918" height="1030" alt="image" src="https://github.com/user-attachments/assets/ab84572b-ddb8-479a-a0d9-57c365f06b2c" />
 
 ## Notes
 
@@ -99,94 +132,26 @@ All nodes: leaderId = 11, electionCompleted = true
 - **Leader detection**: When a node receives its own UID back, it declares itself leader.
 - **Leader announcement**: The leader sends a `LEADER(id)` message around the ring until it returns.
 
+Complexity: **O(n²)** messages for the election plus **O(n)** for the leader announcement.
+
+## Troubleshooting
+
+- java.rmi.ConnectException – The successor node or its RMI registry is not running. Start the successor first.
+
+- java.rmi.NotBoundException – The given successor name is not yet registered. Check the name.
+
+- **Election does not complete** – Ensure all 4 nodes are started and form a complete ring.
+
+## Group Members (CS324)
+
+- Sione Likiliki
+- Seiloni Utuone
+- Fasi Tangataevaha
+- Lanuongo Guttenbeil
+
+Assignment: Election RMI using Ring Topology (LCR).
+
 ---
 
 ## License
 For academic use in distributed systems coursework.
-=======
-# Leader Election using Ring Topology (Java RMI)
-
-## Overview
-This project demonstrates a **Leader Election Algorithm** in a **ring topology** using **Java RMI**.  
-Unlike centralized approaches, this implementation does **not use a peer registry**. Nodes communicate directly with their successor in the ring, passing election and leader messages until a leader is chosen.
-
-The algorithm is based on the **LCR (Le Lann–Chang–Roberts)** protocol, where nodes in a unidirectional ring pass messages containing node IDs, and the node with the highest ID becomes the leader.
-
-## Project Structure
-- **Node.java**  
-  RMI interface for node communication. Declares remote methods for sending election and leader messages between nodes.
-
-- **NodeImpl.java**  
-  Implements the `Node` interface. Each node:
-  - Holds a unique ID.
-  - Maintains a reference to its successor node in the ring.
-  - Initiates and forwards election messages.
-  - Declares itself leader if its ID wins, then propagates the leader message.
-
-## Features
-- Distributed leader election using **ring topology**.
-- No central registry — nodes connect directly to each other.
-- RMI-based communication for remote method invocation.
-- Supports dynamic triggering of elections.
-- Each node only needs to know its **successor** in the ring.
-
-## Requirements
-- Java JDK 8 or newer
-- NetBeans IDE or any Java IDE
-- RMI Registry (`rmiregistry`)
-
-## How to Compile and Run
-1. **Compile**
-   ```bash
-   javac Node.java NodeImpl.java
-   ```
-
-2. **Start RMI Registry** (in a separate terminal):
-   ```bash
-   rmiregistry 1099 &
-   ```
-
-3. **Start multiple nodes**  
-   Launch several `NodeImpl` instances, each with a unique ID and knowledge of its successor. Example:
-   ```bash
-   java NodeImpl 1 rmi://localhost:1099/Node2
-   java NodeImpl 2 rmi://localhost:1099/Node3
-   java NodeImpl 3 rmi://localhost:1099/Node1
-   ```
-
-   In this example:
-   - Node 1’s successor is Node 2
-   - Node 2’s successor is Node 3
-   - Node 3’s successor is Node 1 (closing the ring)
-
-4. **Trigger an Election**  
-   One node can start the election:
-   ```bash
-   java NodeImpl 1 rmi://localhost:1099/Node2 --election
-   ```
-
-5. **Observe Leader Announcement**  
-   Election messages circulate until the node with the **highest ID** declares itself leader and broadcasts the result.
-
-## Example Workflow
-- 3 nodes form a ring: 1 → 2 → 3 → 1.
-- Node 1 starts an election.
-- IDs circulate: (1, 2, 3).
-- Node 3 has the highest ID, becomes leader.
-- Leader message circulates so all nodes know Node 3 is leader.
-
-## .gitignore (Recommended)
-```
-/build/
-/dist/
-/nbproject/private/
-/*.class
-```
-
-## Author
-**Sione Likiliki**  
-
----
-
-This project is for educational purposes in **Distributed Systems**, focusing on leader election protocols using **RMI without a central registry**.
->>>>>>> e293926 (Update Node and NodeImpl with fixed LCR implementation)
