@@ -7,8 +7,6 @@ This project implements the **Le Lann–Chang–Roberts (LCR)** leader election 
 
 Each node is a separate Java process bound to its own RMI registry. The nodes form a logical ring and elect the node with the largest ID as the leader.
 
----
-
 ## Overview
 This project demonstrates distributed leader election using the LCR algorithm.  
 It is designed as a coursework assignment for distributed systems, showing how nodes in a ring topology coordinate through message passing over Java RMI.
