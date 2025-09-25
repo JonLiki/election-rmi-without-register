@@ -1,6 +1,5 @@
 # LCR Ring Election using Java RMI
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Java](https://img.shields.io/badge/Java-8+-blue.svg)](https://openjdk.org/)
 [![Maven](https://img.shields.io/badge/Maven-3.6+-orange.svg)](https://maven.apache.org/)
 

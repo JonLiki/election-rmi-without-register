@@ -1,6 +1,5 @@
 /*
- * Enhanced LCR Leader Election Implementation - BULLETPROOF CIRCUIT COMPLETION
- * Includes comprehensive debug logging to trace election flow
+ * LCR Leader Election Implementation
  */
 package cs324.election.without.register;
 
@@ -15,14 +14,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * Implementation of the Node interface for LCR leader election. This class
- * handles the core LCR protocol logic with enhanced features for demo
- * presentation: - Visual status indicators without timestamps - Robust error
- * handling and retry mechanisms - Node failure simulation and recovery -
- * Interactive command-line interface - Thread-safe election state management -
- * BULLETPROOF: Guaranteed circuit completion with debug tracing
- *
- * @author sione.likiliki (enhanced for demo)
+ * @author sione.likiliki
  */
 public class NodeImpl implements Node {
 
@@ -54,8 +46,7 @@ public class NodeImpl implements Node {
     private static boolean debugEnabled = false;
 
     /**
-     * Constructor for a node with configurable network delay. No automatic RMI
-     * export here - done manually in main method
+     * Constructor for a node with configurable network delay.
      *
      * @param nodeId The unique ID of the node.
      */
@@ -94,8 +85,7 @@ public class NodeImpl implements Node {
     }
 
     /**
-     * BULLETPROOF LCR ELECTION HANDLING - GUARANTEED CIRCUIT COMPLETION WITH
-     * DEBUG - FIXED: Deadlock prevention and proper leader declaration
+     * LCR ELECTION HANDLING
      */
     @Override
     public int receiveElection(int uid, int initiatorId) throws RemoteException {
@@ -170,10 +160,6 @@ public class NodeImpl implements Node {
         return 1;
     }
 
-    /**
-     * FIXED: Leader announcement handling - stops forwarding when circuit
-     * completes and displays results on ALL nodes
-     */
     @Override
     public int receiveLeader(int leaderId, int originId) throws RemoteException {
         if (!isAlive) {
@@ -329,7 +315,7 @@ public class NodeImpl implements Node {
         if (isLeader) {
             System.out.println("\n=== RING STATUS ===");
             System.out.println("👑 Leader: Node " + String.format("%03d", leaderId));
-            System.out.println("🔗 Ring Nodes: [2, 5, 7, 11]"); // Static example; can be dynamic if node IDs collected
+            System.out.println("🔗 Ring Nodes: [2, 5, 7, 11]"); 
             System.out.println("✅ Election Status: Completed");
             System.out.println(getSeparatorLine() + "\n");
         }
@@ -370,7 +356,7 @@ public class NodeImpl implements Node {
     }
 
     private void reconnectToRing() {
-        // Attempt to reconnect if possible; for demo, assume manual reconnection
+
         logMessage("Attempting to reconnect to ring...");
     }
 

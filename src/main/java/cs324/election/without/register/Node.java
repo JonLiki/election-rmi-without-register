@@ -1,7 +1,3 @@
-/*
- * Click https://netbeans.org/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click https://netbeans.org/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package cs324.election.without.register;
 
 /**
